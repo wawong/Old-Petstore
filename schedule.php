@@ -1015,7 +1015,16 @@ $cats = get_cats_by_owner( $user_id );
 			   //     //$cat_checked = 1;
 			        $cinfo  = pm_get_catinfo( $ic);
 		       }
-		       
+		       /*
+			//Willy testing
+			var_dump($cinfo['fvrcpdate']);
+		
+		       if(isset($cinfo['fvrcpdate']))
+		       {
+		       $vdate = new DateTime($cinfo['fvrcpdate']);
+			//$vdate = DateTime::createFromFormat('Y-m-d',$vdate);
+		       echo $vdate->format('m-d-Y');		       
+		       }*/
 		       echo '<script type="text/javascript">';
 		       echo '$(function() {$( "#fvrcpdate';
 		       echo $icat;
@@ -1027,7 +1036,20 @@ $cats = get_cats_by_owner( $user_id );
                    <table width="100%" border="0">
                    <tr rel="<?php echo htmlentities( $cinfo['catname'] ); ?>"><td>   
                      <li class="minihead">FVRCP Vaccination For <?php echo htmlentities( $cinfo['catname'] ); ?></li>
-                     <li><label for="fvrcpdate">FVRCP Vaccination Date</label> <span class="required">*</span> <input type="text" id="fvrcpdate<?php echo $icat ?>" name="fvrcpdate[]" readonly="true" value="<?php if (strlen($cinfo['fvrcpdate']) > 0){echo date('m/d/Y', strtotime($cat['fvrcpdate']));} ?>" /></li>
+                     <li><label for="fvrcpdate">FVRCP Vaccination Date</label> <span class="required">*</span> <input type="text" id="fvrcpdate<?php echo $icat ?>" name="fvrcpdate[]" readonly="true" value="<?php 
+
+
+if (strlen($cinfo['fvrcpdate']) > 0)
+{
+  $vdate = new DateTime($cinfo['fvrcpdate']);
+  $newDate = $vdate->format('m-d-Y');	
+  echo $newDate;
+  //echo date('m/d/Y', strtotime($cat['fvrcpdate']));
+} 
+
+
+
+?>" /></li>
 			
 
                      <li><label for="fvrcprecord">Record Delivery Method</label> <span class="required">*</span>
@@ -1103,4 +1125,3 @@ $cats = get_cats_by_owner( $user_id );
 		</div><!-- #primary -->
 
 <?php get_footer(); ?>
-
